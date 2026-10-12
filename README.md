@@ -7,7 +7,7 @@ REA 逆向助手 — AI 聊天 + 本地 APK 静态分析
 [Releases](../../releases) 页面下载最新 APK（包名 `cn.rikka.rea`）
 
 ```
-https://github.com/SukiSU-rikka/rikkachat/releases/download/v1.5.0/rikkachat-v1.5.0.apk
+https://github.com/SukiSU-rikka/rikkachat/releases/download/v1.6.0/rikkachat-v1.6.0.apk
 ```
 
 ## 功能
@@ -28,10 +28,12 @@ https://github.com/SukiSU-rikka/rikkachat/releases/download/v1.5.0/rikkachat-v1.
 - 网络行为画像：域名聚合，标记 IP 直连 / 内网 / HTTP 明文
 - 风险评分：0-100 启发式打分（仅供参考）
 - 分析历史：localStorage 存 20 条报告
+- 📚 REA 知识库（离线）：方法论/工作流/工具表/实战案例
 - 一键生成完整 Markdown 报告，发给 AI 解读
 
 ## 版本历史
 
+- v1.6.0：📚 REA 知识库（离线）+ REA 助手按 REA 工作流重写
 - v1.5.0：网络画像 + 风险评分 + 分析历史
 - v1.4.0：so 字符串 + assets 查看器 + 完整报告
 - v1.3.0：APK 对比 + 证书信息
