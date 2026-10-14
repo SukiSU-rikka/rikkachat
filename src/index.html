@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>REA Chat</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- 顶栏 -->
+<header id="topbar">
+  <select id="assistant-select" aria-label="切换助手"></select>
+  <div class="topbar-actions">
+    <button id="btn-new" title="新会话">＋</button>
+    <button id="btn-settings" title="设置">⚙</button>
+  </div>
+</header>
+
+<!-- 聊天页 -->
+<div id="page-chat">
+<main id="chat">
+  <div id="messages"></div>
+</main>
+
+<!-- 输入区 -->
+<footer id="composer">
+  <textarea id="input" rows="1" placeholder="输入消息…"></textarea>
+  <button id="btn-send">发送</button>
+</footer>
+</div>
+
+<!-- 分析页 -->
+<div id="page-analyze" class="hidden">
+  <main id="analyze-main">
+    <div class="modeseg">
+      <button id="mode-single" class="active">单个分析</button>
+      <button id="mode-compare">对比两个 APK</button>
+    </div>
+    <div id="single-pane">
+    <section class="card">
+      <h3>分析历史</h3>
+      <p class="hint">生成完整报告后自动保存，点击可重新查看上次的报告（无需重新选文件）。</p>
+      <div id="history-list"><p class="hint">暂无历史</p></div>
+    </section>
+    <div id="history-viewer"></div>
+    <section class="card">
+      <h3>APK 静态分析</h3>
+      <p class="hint">选择本地 APK 文件，纯本机解析，不上传。</p>
+      <label class="file-picker">
+        <input type="file" id="apk-file" accept=".apk" style="display:none">
+        <span id="file-label" class="file-label">点此选择 APK 文件</span>
+      </label>
+      <div class="row" style="margin-top:12px">
+        <button id="btn-analyze" class="primary">开始分析</button>
+        <button id="btn-send-ai" style="display:none">发给 AI 分析</button>
+      </div>
+      <p id="ana-status" class="hint"></p>
+    </section>
+    <div id="ana-result"></div>
+    </div>
+    <div id="compare-pane" class="hidden">
+    <section class="card">
+      <h3>APK 对比</h3>
+      <p class="hint">A = 旧版，B = 新版。纯本机解析，不上传。</p>
+      <label class="file-picker">
+        <input type="file" id="apk-file-a" accept=".apk" style="display:none">
+        <span id="file-label-a" class="file-label">点此选择 A（旧版）APK</span>
+      </label>
+      <label class="file-picker" style="margin-top:8px">
+        <input type="file" id="apk-file-b" accept=".apk" style="display:none">
+        <span id="file-label-b" class="file-label">点此选择 B（新版）APK</span>
+      </label>
+      <label class="checkline"><input type="checkbox" id="cmp-dexstr" checked> 对比 dex 字符串（较慢，但能发现新增的 URL/API/可疑字符串）</label>
+      <div class="row" style="margin-top:12px">
+        <button id="btn-compare" class="primary">开始对比</button>
+        <button id="btn-compare-ai" style="display:none">发给 AI 解读</button>
+      </div>
+      <p id="cmp-status" class="hint"></p>
+    </section>
+    <div id="cmp-result"></div>
+    </div>
+  </main>
+</div>
+
+<!-- 知识页 -->
+<div id="page-kb" class="hidden">
+  <main id="kb-main">
+    <div id="kb-content"></div>
+  </main>
+</div>
+
+<!-- 底部 Tab -->
+<nav id="tabbar">
+  <button id="tab-chat" class="active">💬 聊天</button>
+  <button id="tab-analyze">🔍 分析</button>
+  <button id="tab-kb">📚 知识</button>
+</nav>
+
+<!-- 设置页 -->
+<div id="settings" class="page hidden">
+  <div class="page-head">
+    <button id="btn-back">‹ 返回</button>
+    <h2>设置</h2>
+  </div>
+  <section class="card">
+    <h3>API 配置</h3>
+    <label>服务商
+      <select id="set-provider"></select>
+    </label>
+    <label>API Key
+      <input id="set-key" type="password" placeholder="sk-…" autocomplete="off">
+    </label>
+    <label>Base URL
+      <input id="set-base" type="text" placeholder="https://api.deepseek.com">
+    </label>
+    <label>模型
+      <input id="set-model" type="text" placeholder="deepseek-chat">
+    </label>
+    <div class="row">
+      <button id="btn-save-api" class="primary">保存 API 配置</button>
+      <button id="btn-test-api">测试连接</button>
+    </div>
+    <p id="api-status" class="hint"></p>
+  </section>
+  <section class="card">
+    <h3>自定义助手</h3>
+    <div id="assistant-list"></div>
+    <label>助手名字
+      <input id="new-asst-name" type="text" placeholder="例如：代码审查">
+    </label>
+    <label>System Prompt
+      <textarea id="new-asst-prompt" rows="3" placeholder="留空则为通用聊天"></textarea>
+    </label>
+    <button id="btn-add-asst" class="primary">添加助手</button>
+  </section>
+</div>
+
+<script src="providers.js"></script>
+<script src="zip.js"></script>
+<script src="axml.js"></script>
+<script src="dex.js"></script>
+<script src="so.js"></script>
+<script src="cert.js"></script>
+<script src="net.js"></script>
+<script src="analyzer.js"></script>
+<script src="rea-kb.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
